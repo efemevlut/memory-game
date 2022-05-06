@@ -54,3 +54,13 @@
   font-size: 1rem;
 }
 
+.gridContainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  width: 90%;
+  margin: auto;
+  gap: 4rem;
+  margin-top: 2rem;
+}
+
+

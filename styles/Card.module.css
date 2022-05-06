@@ -1,56 +1,43 @@
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.gridItem {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #FF8B37;
+  font-size: 30px;
+  text-align: center;
+  height: 10vh;
+  perspective: 1000px;
 }
 
-.wrapper {
-  height: 85%;
-  width: 90%;
-  border: 2px solid black;
+.flipCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
 
-.title {
-  width: 90%;
-  padding-left: 4rem;
-  font-weight: 900;
-  font-size: 1rem;
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flipCardInner {
+  transform: rotateY(180deg);
 }
 
-.description {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  margin: auto;
-  padding-top: 2rem;
+/* .flipCardClose {
+  display: none;
+} */
+
+/* Position the front and back side */
+.flipCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
 }
 
-.description button {
-  background-color: #FF8B37;
-  border: none;
+/* Style the back side */
+.flipCardBack {
+  background-color: dodgerblue;
   color: white;
-  font-weight: bold;
-  width: 15rem;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.description button:active {
-  background-color: #b4774b;
-  box-shadow: 4px 5px 2px #666;
-  transform: translateY(4px);
-}
-
-.description button:hover {
-  background-color: #ca5e10;
-}
-
-.description p {
-  color: black;
-  font-weight: bold;
-  font-size: 1rem;
+  transform: rotateY(180deg);
 }
 
