@@ -8,7 +8,7 @@
 }
 
 .wrapper {
-  height: 85%;
+  height: 90%;
   width: 90%;
   border: 2px solid black;
 }
@@ -56,10 +56,10 @@
 
 .gridContainer {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  width: 90%;
-  margin: auto;
-  gap: 4rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* width: 90%; */
+  /* margin: auto; */
+  grid-gap: 20px;
   margin-top: 2rem;
 }
 

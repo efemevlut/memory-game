@@ -1,4 +1,40 @@
-.gridItem {
+.card {
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card img {
+  width: 40%;
+  height: 40%;
+  /* display: block; */
+  border: 2px solid #FF8B37;
+  border-radius: 5px;
+}
+
+.card .front {
+  transform: rotateY(90deg);
+  transition: all ease-in 0.2s;
+  position: 'absolute';
+}
+
+.flipped .front {
+  transform: rotateY(0deg);
+  transition-delay: 0.2s;
+}
+
+.card .back {
+  transition: all ease-in 0.2s;
+  transition-delay: 0.2s;
+}
+
+.flipped .back {
+  transform: rotateY(90deg);
+  transition-delay: 0s;
+}
+
+/* .gridItem {
   background-color: rgba(255, 255, 255, 0.8);
   border: 2px solid #FF8B37;
   font-size: 30px;
@@ -16,28 +52,21 @@
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
 .flipCardInner {
   transform: rotateY(180deg);
 }
 
-/* .flipCardClose {
-  display: none;
-} */
-
-/* Position the front and back side */
 .flipCardBack {
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden; 
   backface-visibility: hidden;
 }
 
-/* Style the back side */
 .flipCardBack {
   background-color: dodgerblue;
   color: white;
   transform: rotateY(180deg);
-}
+} */
 
