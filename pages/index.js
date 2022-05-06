@@ -4,27 +4,29 @@ import { useState, useEffect } from 'react'
 
 const data = [
   { src: '/css3.png', matched: false },
-  { src: '/dj.png', matched: false },
+  { src: '/es6.jpg', matched: false },
   { src: '/git.png', matched: false },
   { src: '/html.png', matched: false },
   { src: '/js-logo.png', matched: false },
   { src: '/mysql.png', matched: false },
   { src: '/node.png', matched: false },
-  { src: '/reactt.png', matched: false },
+  { src: '/postman.png', matched: false },
 ]
 
 export default function Home() {
 
   const [selectedCard1, setSelectedCard1] = useState(null)
   const [selectedCard2, setSelectedCard2] = useState(null)
+  const [score, setScore] = useState(100)
+  const [text, setText] = useState('')
 
   const [cards, setCards] = useState([])
-  const [turns, setTurns] = useState(0)
 
   const shuffleData = () => {
+    setScore(100)
+    setText('')
     const shuffledData = [...data, ...data].sort(() => Math.random() - 0.5).map((card) => ({ ...card, id: Math.random() }))
     setCards(shuffledData)
-    setTurns(0)
   }
 
   const handleSelect = (item) => {
@@ -37,41 +39,46 @@ export default function Home() {
       if (selectedCard1.src === selectedCard2.src) {
         setCards(prevCards => {
           return prevCards.map(card => {
-            if(card.src === selectedCard1){
+            if(card.src === selectedCard1.src){
               return {...card, matched: true}
             } else {
+              setScore(score + 10)
+              setText('- Matched')
               return card
             }
           })
         })
         resetTurn()
       } else {
-        console.log('Those cards do not match');
-        setTimeout(() => resetTurn(), 1000)
+        setScore(score - 1)
+        setText('- Not Matched')
+        setTimeout(() => {
+          resetTurn()
+          setText('')
+        }, 1000)
       }
     }
   }, [selectedCard1, selectedCard2]
   )
 
-  const resetTurn = () => {
+  const resetTurn = (bool) => {
     setSelectedCard1(null)
     setSelectedCard2(null)
-    setTurns(prevTurns => prevTurns + 1)
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <p>Memory Game Layout</p>
+        <p>Memory Game Layout {text}</p>
       </div>
       <div className={styles.wrapper}>
         <div className={styles.description}>
           <button onClick={shuffleData}>NEW GAME</button>
-          <p>Score: 100</p>
+          <p>Score: {score}</p>
         </div>
         <div className={styles.gridContainer}>
           {cards.map((item) => (
-            <Card key={item.id} card={item} handleSelect={handleSelect} flipped={item === selectedCard1 || item === selectedCard2 || item.matched}/>
+            <Card key={item.id} card={item} handleSelect={handleSelect} flipped={item === selectedCard1 || item === selectedCard2 || item.matched} />
           ))}
         </div>
       </div>
