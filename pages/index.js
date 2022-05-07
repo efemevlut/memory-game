@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css'
 import Card from '../components/Card'
 import { useState, useEffect } from 'react'
+import Swal from 'sweetalert2'
 
 const data = [
   { src: '/css3.png', matched: false },
@@ -14,6 +15,8 @@ const data = [
 ]
 
 export default function Home() {
+  
+  const matchedArr = []
 
   const [selectedCard1, setSelectedCard1] = useState(null)
   const [selectedCard2, setSelectedCard2] = useState(null)
@@ -21,6 +24,19 @@ export default function Home() {
   const [text, setText] = useState('')
 
   const [cards, setCards] = useState([])
+
+  const isComplete= (currentValue) => currentValue === true
+  
+
+  cards.forEach(item => {
+    matchedArr.push(item.matched)
+  })
+
+  matchedArr.every(isComplete) && matchedArr.length > 0 && Swal.fire(
+    'Good job!',
+    'You finished the game!',
+    'success',
+  )
 
   const shuffleData = () => {
     setScore(100)
@@ -61,7 +77,7 @@ export default function Home() {
   }, [selectedCard1, selectedCard2]
   )
 
-  const resetTurn = (bool) => {
+  const resetTurn = () => {
     setSelectedCard1(null)
     setSelectedCard2(null)
   }
@@ -76,9 +92,9 @@ export default function Home() {
           <button onClick={shuffleData}>NEW GAME</button>
           <p>Score: {score}</p>
         </div>
-        <div className={styles.gridContainer}>
+        <div className={styles.gridContainer} style={{pointerEvents: selectedCard1 && selectedCard2 ? 'none' : 'auto'}}>
           {cards.map((item) => (
-            <Card key={item.id} card={item} handleSelect={handleSelect} flipped={item === selectedCard1 || item === selectedCard2 || item.matched} />
+            <Card key={item.id} card={item} handleSelect={handleSelect} flipped={item === selectedCard1 || item === selectedCard2 || item.matched} notMatch={selectedCard1 && selectedCard2 && (selectedCard1.src !== selectedCard2.src)}/>
           ))}
         </div>
       </div>
